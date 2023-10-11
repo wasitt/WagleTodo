@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:wagle_todo/component/icon_buttons.dart';
 import 'package:wagle_todo/const/colors.dart';
+import 'package:wagle_todo/const/text_styles.dart';
 import 'package:wagle_todo/database/drift_database.dart';
 
 ///투두 리스트
@@ -99,6 +100,7 @@ class _TodoReorderableListViewState extends State<TodoReorderableListView> {
 
 ///투두 리스트의 투두타일
 ///
+
 class TodoListTile extends StatefulWidget {
   final int startTime;
   final int endTime;
@@ -152,10 +154,27 @@ class _TodoListTileState extends State<TodoListTile> {
                           mainAxisSize: MainAxisSize.min,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text("수정하기"),
-                            Text("다른 날로 미루기"),
-                            Text("소주제 만들기"),
-                            Text("시간 설정하기")
+                            ///231012-3
+                            ///텍스트 레이아웃 구체화
+                            ///기능 구체화 해야함
+                            ///
+                            ///
+                            TodoDialogTextButton(
+                              text: "수정하기",
+                              onPressed: onModifyButtonPressed,
+                            ),
+                            TodoDialogTextButton(
+                              text: "다른 날로 미루기",
+                              onPressed: onPostponeButtonPressed,
+                            ),
+                            TodoDialogTextButton(
+                              text: "소주제 만들기",
+                              onPressed: onMakeSubtodoButtonPressed,
+                            ),
+                            TodoDialogTextButton(
+                              text: "시간 설정하기",
+                              onPressed: onSelectTimeButtonPressed,
+                            ),
                           ],
                         ),
                       );
@@ -165,18 +184,54 @@ class _TodoListTileState extends State<TodoListTile> {
               ),
             ],
           ),
-
-          ///시간 박스
-          ///
-          Padding(
-            padding: const EdgeInsets.only(left: 30.0),
-            child: Text(
-              "${widget.startTime}:00 ~ ${widget.endTime}:00",
-              style: const TextStyle(fontWeight: FontWeight.w200),
-            ),
-          ),
+          setTimeBox(),
         ],
       ),
     );
   }
+
+  ///231012-3
+  ///시간이 기본 값이면 박스를 표시하지 않음.
+  ///
+  Padding setTimeBox() {
+    if (widget.startTime == 0 && widget.endTime == 0) {
+      return const Padding(padding: EdgeInsets.zero);
+    }
+    return Padding(
+      padding: const EdgeInsets.only(left: 30.0),
+      child: Text(
+        "${widget.startTime}:00 ~ ${widget.endTime}:00",
+        style: const TextStyle(fontWeight: FontWeight.w200),
+      ),
+    );
+  }
 }
+
+class TodoDialogTextButton extends StatelessWidget {
+  final String text;
+  final void Function()? onPressed;
+  const TodoDialogTextButton({
+    required this.text,
+    this.onPressed,
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return TextButton(
+      onPressed: onPressed,
+      child: Text(
+        text,
+        style: NotoSansKR(FontWeight.w400, 20).copyWith(color: BLACK_COLOR),
+      ),
+    );
+  }
+}
+
+///231012-3
+///일단 아무 기능 없는 함수 넣어놓음.
+///
+void onModifyButtonPressed() {}
+void onPostponeButtonPressed() {}
+void onMakeSubtodoButtonPressed() {}
+void onSelectTimeButtonPressed() {}

@@ -191,8 +191,10 @@ class _RegisterTodoState extends State<RegisterTodo> {
             onPressed: () async {
               await GetIt.I<LocalDatabase>().createTodo(
                 TodosCompanion(
-                  content: Value(_contentController!.text),
+                  content: Value(_contentController.text),
                   date: Value(widget.selectedDate),
+                  startTime: Value(0),
+                  endTime: Value(0),
                   isCompleted: Value(false),
                 ),
               );
