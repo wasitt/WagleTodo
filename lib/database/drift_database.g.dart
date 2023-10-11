@@ -33,13 +33,17 @@ class $TodosTable extends Todos with TableInfo<$TodosTable, Todo> {
   @override
   late final GeneratedColumn<int> startTime = GeneratedColumn<int>(
       'start_time', aliasedName, false,
-      type: DriftSqlType.int, requiredDuringInsert: true);
+      type: DriftSqlType.int,
+      requiredDuringInsert: false,
+      defaultValue: const Constant(0));
   static const VerificationMeta _endTimeMeta =
       const VerificationMeta('endTime');
   @override
   late final GeneratedColumn<int> endTime = GeneratedColumn<int>(
       'end_time', aliasedName, false,
-      type: DriftSqlType.int, requiredDuringInsert: true);
+      type: DriftSqlType.int,
+      requiredDuringInsert: false,
+      defaultValue: const Constant(0));
   static const VerificationMeta _isCompletedMeta =
       const VerificationMeta('isCompleted');
   @override
@@ -81,14 +85,10 @@ class $TodosTable extends Todos with TableInfo<$TodosTable, Todo> {
     if (data.containsKey('start_time')) {
       context.handle(_startTimeMeta,
           startTime.isAcceptableOrUnknown(data['start_time']!, _startTimeMeta));
-    } else if (isInserting) {
-      context.missing(_startTimeMeta);
     }
     if (data.containsKey('end_time')) {
       context.handle(_endTimeMeta,
           endTime.isAcceptableOrUnknown(data['end_time']!, _endTimeMeta));
-    } else if (isInserting) {
-      context.missing(_endTimeMeta);
     }
     if (data.containsKey('is_completed')) {
       context.handle(
@@ -250,13 +250,11 @@ class TodosCompanion extends UpdateCompanion<Todo> {
     this.id = const Value.absent(),
     required String content,
     required DateTime date,
-    required int startTime,
-    required int endTime,
+    this.startTime = const Value.absent(),
+    this.endTime = const Value.absent(),
     this.isCompleted = const Value.absent(),
   })  : content = Value(content),
-        date = Value(date),
-        startTime = Value(startTime),
-        endTime = Value(endTime);
+        date = Value(date);
   static Insertable<Todo> custom({
     Expression<int>? id,
     Expression<String>? content,

@@ -34,14 +34,6 @@ class HomeSpeedDial extends StatelessWidget {
           },
         ),
         SpeedDialChild(
-          child: const Icon(Icons.repeat_outlined, color: WHITE_COLOR),
-          label: "루틴등록",
-          backgroundColor: BLACK_COLOR.withOpacity(0.2),
-          labelBackgroundColor: BLACK_COLOR.withOpacity(0.2),
-          labelStyle: const TextStyle(color: WHITE_COLOR),
-          onTap: () {},
-        ),
-        SpeedDialChild(
           child: const Icon(Icons.category_outlined, color: WHITE_COLOR),
           label: "카테고리 관리",
           backgroundColor: BLACK_COLOR.withOpacity(0.2),
@@ -159,22 +151,16 @@ class RegisterTodo extends StatefulWidget {
 }
 
 class _RegisterTodoState extends State<RegisterTodo> {
-  TextEditingController? _contentController = TextEditingController();
-  TextEditingController? _timeStartController = TextEditingController();
-  TextEditingController? _timeEndController = TextEditingController();
+  final TextEditingController _contentController = TextEditingController();
 
   @override
   void dispose() {
-    _contentController?.dispose();
-    _timeStartController?.dispose();
-    _timeEndController?.dispose();
+    _contentController.dispose();
+
     super.dispose();
   }
 
   final GlobalKey<FormState> formKey = GlobalKey();
-  // int? startTime; // 시작 시간 저장 변수
-  // int? endTime; // 종료 시간 저장 변수
-  // String? content; // 일정 내용 저장 변수
   bool? isCompleted;
 
   @override
@@ -191,21 +177,13 @@ class _RegisterTodoState extends State<RegisterTodo> {
                 child: Text("할일 입력"),
               ),
               InputTextField(contentController: _contentController),
+
+              ///231012-2
+              ///Todo 등록에 시간 빼기
+              ///데이터베이스 부분 초기화
+              ///
               const Padding(
                 padding: EdgeInsets.all(8.0),
-                child: Text("시간 설정"),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                      child: InputTimeField(
-                          timeStartController: _timeStartController)),
-                  const SizedBox(width: 10, child: Text("~")),
-                  Expanded(
-                      child: InputTimeField(
-                          timeStartController: _timeEndController))
-                ],
               ),
             ],
           ),
@@ -214,8 +192,6 @@ class _RegisterTodoState extends State<RegisterTodo> {
               await GetIt.I<LocalDatabase>().createTodo(
                 TodosCompanion(
                   content: Value(_contentController!.text),
-                  startTime: Value(int.parse(_timeStartController!.text)),
-                  endTime: Value(int.parse(_timeEndController!.text)),
                   date: Value(widget.selectedDate),
                   isCompleted: Value(false),
                 ),
@@ -225,36 +201,6 @@ class _RegisterTodoState extends State<RegisterTodo> {
             child: const Text("저장"),
           ),
         ],
-      ),
-    );
-  }
-}
-
-///Todo 다이얼로그의 시간입력칸
-///
-class InputTimeField extends StatelessWidget {
-  const InputTimeField({
-    super.key,
-    required TextEditingController? timeStartController,
-  }) : _timeStartController = timeStartController;
-
-  final TextEditingController? _timeStartController;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-      child: Container(
-        padding: const EdgeInsets.only(left: 10),
-        decoration: BoxDecoration(
-          border: Border.all(color: BLACK_COLOR.withOpacity(0.2)),
-          borderRadius: BorderRadius.circular(20),
-        ),
-        child: TextFormField(
-          decoration: const InputDecoration(
-              border: InputBorder.none, hintText: "숫자만 입력!"),
-          controller: _timeStartController,
-        ),
       ),
     );
   }
