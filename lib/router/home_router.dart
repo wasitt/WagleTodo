@@ -15,8 +15,9 @@ import 'package:wagle_todo/screen/drawer_screen/information_settings_screen.dart
 import 'package:wagle_todo/screen/drawer_screen/inquiry_settings_screen.dart';
 import 'package:wagle_todo/screen/drawer_screen/language_settings_screen.dart';
 import 'package:wagle_todo/screen/drawer_screen/notice_settings_screen.dart';
-import 'package:wagle_todo/screen/drawer_screen/notification_settings_screen.dart';
+import 'package:wagle_todo/screen/drawer_screen/outlook_settings_screen.dart';
 import 'package:wagle_todo/screen/drawer_screen/premium_settings_screen.dart';
+import 'package:wagle_todo/screen/drawer_screen/feedback_settings_screen.dart';
 
 ///shop sub screen list
 ///
@@ -61,12 +62,16 @@ final GoRouter HomeRouter = GoRouter(
           builder: (context, state) => const NoticeSettingsScreen(),
         ),
         GoRoute(
-          path: "notification_setting",
-          builder: (context, state) => const NotificationSettingsScreen(),
+          path: "outlook_setting",
+          builder: (context, state) => const OutlookSettingsScreen(),
         ),
         GoRoute(
           path: "premium_setting",
           builder: (context, state) => const PremiumSettingsScreen(),
+        ),
+        GoRoute(
+          path: "feedback_setting",
+          builder: (context, state) => const FeedbackSettingsScreen(),
         ),
 
         ///shop sub screen
