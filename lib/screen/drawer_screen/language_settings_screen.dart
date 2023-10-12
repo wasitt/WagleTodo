@@ -9,7 +9,7 @@ class LanguageSettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       appBar: TextAppBar(text: "언어"),
       body: Column(
         children: [
