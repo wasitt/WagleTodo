@@ -37,18 +37,17 @@ class _OnOffIconButtonState extends State<OnOffIconButton> {
       padding: widget.padding,
       constraints: widget.constraints,
 
-      ///231012-3
-      ///o서 onPressed 함수가 주어지지 않았을 때 onPressedBasic 함수가 실행됩니다. 만약 onPressed 함수가 주어진다면 해당 함수가 실행됩니다
-      onPressed: widget.onPressed ?? onPressedBasic,
+      ///231012-5
+      ///기본적으로 클릭할때 아이콘은 전환.
+      ///추가적으로 받은 매개변수의 함수 실행.
+      ///
+      onPressed: () {
+        isPressed = !isPressed;
+        widget.onPressed?.call();
+        setState(() {});
+      },
       icon: Icon(isPressed ? widget.onIcon : widget.offIcon),
     );
-  }
-
-  ///231012-3
-  ///
-  void onPressedBasic() {
-    isPressed = !isPressed;
-    setState(() {});
   }
 }
 

@@ -20,7 +20,7 @@ class CalendarProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void monthFormat(bool isMonthFormat) {
+  void changeCalendarFormat(bool isMonthFormat) {
     if (isMonthFormat) {
       _calendarFormat = CalendarFormat.month;
     } else {
