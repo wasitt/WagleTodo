@@ -23,7 +23,6 @@ class ToggleSettingButton extends StatelessWidget {
                   TimeFormat24Toggle(),
                   DarkModeToggle(),
                   PostponeTodoToggle(),
-                  // ShowCategoryToggle(),
                 ],
               ),
             );

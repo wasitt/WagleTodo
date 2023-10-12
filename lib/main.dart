@@ -21,8 +21,7 @@ void main() async {
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => CalendarStartProvider()),
-        ChangeNotifierProvider(create: (_) => CalendarFormatProvider()),
+        ChangeNotifierProvider(create: (_) => CalendarProvider()),
       ],
       child: MaterialApp.router(
         routerConfig: homeRouter,

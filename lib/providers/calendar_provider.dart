@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-///달력시작요일
+///20231012-3
+///calendar provider 하나로 통합.
 ///
-class CalendarStartProvider with ChangeNotifier {
+class CalendarProvider with ChangeNotifier {
   StartingDayOfWeek _calendarStart = StartingDayOfWeek.monday;
   StartingDayOfWeek get calendarStart => _calendarStart;
+
+  CalendarFormat _calendarFormat = CalendarFormat.month;
+  CalendarFormat get calendarFormat => _calendarFormat;
 
   void mondayStart(bool isMondayStart) {
     if (isMondayStart) {
@@ -15,13 +19,6 @@ class CalendarStartProvider with ChangeNotifier {
     }
     notifyListeners();
   }
-}
-
-///달력형식
-///
-class CalendarFormatProvider with ChangeNotifier {
-  CalendarFormat _calendarFormat = CalendarFormat.month;
-  CalendarFormat get calendarFormat => _calendarFormat;
 
   void monthFormat(bool isMonthFormat) {
     if (isMonthFormat) {

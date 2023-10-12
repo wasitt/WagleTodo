@@ -23,8 +23,8 @@ class HomeCalendar extends StatelessWidget {
     return TableCalendar(
       locale: "ko_KR",
       weekendDays: const [DateTime.sunday],
-      calendarFormat: context.watch<CalendarFormatProvider>().calendarFormat,
-      startingDayOfWeek: context.watch<CalendarStartProvider>().calendarStart,
+      calendarFormat: context.watch<CalendarProvider>().calendarFormat,
+      startingDayOfWeek: context.watch<CalendarProvider>().calendarStart,
       focusedDay: DateTime.now(),
       firstDay: DateTime(2000, 1, 1),
       lastDay: DateTime(2999, 12, 31),
