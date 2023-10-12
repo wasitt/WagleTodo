@@ -11,7 +11,7 @@ class OnOffIconButton extends StatefulWidget {
   final double? iconSize;
   final EdgeInsetsGeometry? padding;
   final BoxConstraints? constraints;
-  final dynamic Function()? onPressed; // isPressed를 받도록 수정
+  final void Function()? onPressed; // isPressed를 받도록 수정
 
   const OnOffIconButton({
     this.onIcon = Icons.toggle_on,
@@ -36,13 +36,19 @@ class _OnOffIconButtonState extends State<OnOffIconButton> {
       iconSize: widget.iconSize,
       padding: widget.padding,
       constraints: widget.constraints,
-      onPressed: () {
-        widget.onPressed; // onPressed 함수 호출 및 isPressed 값 전달
-        isPressed = !isPressed;
-        setState(() {});
-      },
+
+      ///231012-3
+      ///o서 onPressed 함수가 주어지지 않았을 때 onPressedBasic 함수가 실행됩니다. 만약 onPressed 함수가 주어진다면 해당 함수가 실행됩니다
+      onPressed: widget.onPressed ?? onPressedBasic,
       icon: Icon(isPressed ? widget.onIcon : widget.offIcon),
     );
+  }
+
+  ///231012-3
+  ///
+  void onPressedBasic() {
+    isPressed = !isPressed;
+    setState(() {});
   }
 }
 
