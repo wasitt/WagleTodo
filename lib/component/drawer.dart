@@ -13,25 +13,31 @@ class ProfileDrawer extends StatelessWidget {
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
-          UserAccountsDrawerHeader(
-            accountName: Text("최학기"),
-            accountEmail: Text("chgedward@sogang.ac.kr"),
-            currentAccountPicture: CircleAvatar(
-              backgroundColor: WHITE_COLOR,
-              backgroundImage: AssetImage("asset/img/서강대학교.png"),
-            ),
-            otherAccountsPictures: [],
-            onDetailsPressed: () => {print("clicked")},
-            decoration: BoxDecoration(
-              color: RED_COLOR.withOpacity(0.8),
-              borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(24),
-                bottomRight: Radius.circular(24),
+          Theme(
+            data: Theme.of(context).copyWith(dividerColor: BLACK_COLOR),
+            child: UserAccountsDrawerHeader(
+              accountName: const Text(
+                "최학기",
+                style: TextStyle(color: BLACK_COLOR),
+              ),
+              accountEmail: const Text(
+                "chgedward@sogang.ac.kr",
+                style: TextStyle(color: BLACK_COLOR),
+              ),
+              currentAccountPicture: const CircleAvatar(
+                backgroundColor: WHITE_COLOR,
+                backgroundImage: AssetImage("asset/img/서강대학교.png"),
+              ),
+              arrowColor: BLACK_COLOR,
+              otherAccountsPictures: [],
+              onDetailsPressed: () => {print("clicked")},
+              decoration: const BoxDecoration(
+                color: WHITE_COLOR,
               ),
             ),
           ),
           const RouteListTile(
-            iconData: Icons.person_3_outlined,
+            iconData: Icons.account_circle_outlined,
             text: "계정",
             route: "/account_setting",
           ),
@@ -41,19 +47,24 @@ class ProfileDrawer extends StatelessWidget {
             route: "/language_setting",
           ),
           const RouteListTile(
+            iconData: Icons.video_label_outlined,
+            text: "외관",
+            route: "/outlook_setting",
+          ),
+          const RouteListTile(
             iconData: Icons.notifications_outlined,
             text: "알림",
             route: "/notification_setting",
           ),
           const RouteListTile(
-            iconData: Icons.feed_outlined,
-            text: "공지사항",
-            route: "/notice_setting",
-          ),
-          const RouteListTile(
             iconData: Icons.diamond_outlined,
             text: "Premium",
             route: "/premium_setting",
+          ),
+          const RouteListTile(
+            iconData: Icons.chat_outlined,
+            text: "피드백",
+            route: "/feedback_setting",
           ),
           const RouteListTile(
             iconData: Icons.info_outline_rounded,
@@ -88,7 +99,7 @@ class RouteListTile extends StatelessWidget {
       leading: Icon(iconData),
       title: Text(text),
       onTap: () => context.go(route),
-      trailing: Icon(Icons.arrow_forward_ios_outlined),
+      trailing: const Icon(Icons.arrow_forward_ios_outlined),
     );
   }
 }
