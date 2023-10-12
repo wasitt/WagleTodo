@@ -16,7 +16,7 @@ class HomeScreenAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      leading: OpenDrawerButton(),
+      leading: const OpenDrawerButton(),
       foregroundColor: BLACK_COLOR,
       backgroundColor: WHITE_COLOR,
       elevation: 1.0,
@@ -25,7 +25,7 @@ class HomeScreenAppBar extends StatelessWidget implements PreferredSizeWidget {
           child:
               Image.asset("asset/img/mainlogo.png", width: 110, height: 110)),
       actions: [
-        const ToggleSettingButton(),
+        const OpenToggleSettingDialog(),
         const SizedBox(width: 15),
         RouteIconButton(
             context: context, icon: Icons.search_outlined, route: "/shop"),

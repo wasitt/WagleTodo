@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:wagle_todo/component/icon_buttons.dart';
 
-class ToggleSettingButton extends StatelessWidget {
-  const ToggleSettingButton({
+class OpenToggleSettingDialog extends StatelessWidget {
+  const OpenToggleSettingDialog({
     super.key,
   });
 
@@ -18,11 +18,11 @@ class ToggleSettingButton extends StatelessWidget {
               content: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  MondayStartToggle(),
-                  MonthFormatToggle(),
-                  TimeFormat24Toggle(),
-                  DarkModeToggle(),
-                  PostponeTodoToggle(),
+                  ToggleButton(text: "월요일부터 시작"),
+                  ToggleButton(text: "달력 월/주로 보기"),
+                  ToggleButton(text: "todo시간 24시간제로 변경"),
+                  ToggleButton(text: "Todo 자동 미루기"),
+                  ToggleButton(text: "다크모드 on/off"),
                 ],
               ),
             );
@@ -34,86 +34,27 @@ class ToggleSettingButton extends StatelessWidget {
   }
 }
 
-///달력월요일부터 시작 토글
+///20231012-4
+///토글세팅의 버튼들 하나로 추출하기.
 ///
-class MondayStartToggle extends StatelessWidget {
-  const MondayStartToggle({super.key});
+class ToggleButton extends StatelessWidget {
+  final String? text;
+  final void Function()? onPressed;
+  const ToggleButton({
+    this.text,
+    this.onPressed,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return const Row(
+    return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text("달력 월요일부터 시작"),
-        OnOffIconButton(),
-      ],
-    );
-  }
-}
-
-///월/주로 보기 토글
-///
-class MonthFormatToggle extends StatelessWidget {
-  const MonthFormatToggle({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text("달력 월/주로 보기"),
-        OnOffIconButton(),
-      ],
-    );
-  }
-}
-
-///24시간제 토글
-///
-class TimeFormat24Toggle extends StatelessWidget {
-  const TimeFormat24Toggle({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text("24시간제로 변경"),
-        OnOffIconButton(),
-      ],
-    );
-  }
-}
-
-///다크모드 토글
-///
-class DarkModeToggle extends StatelessWidget {
-  const DarkModeToggle({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text("다크모드 on/off"),
-        OnOffIconButton(),
-      ],
-    );
-  }
-}
-
-///자동미루기
-///
-class PostponeTodoToggle extends StatelessWidget {
-  const PostponeTodoToggle({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text("자동 미루기 on/off"),
-        OnOffIconButton(),
+        Text(text!),
+        OnOffIconButton(
+          onPressed: onPressed,
+        ),
       ],
     );
   }
